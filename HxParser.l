@@ -3,8 +3,12 @@
 	#include "HxParser.tab.c"
 %}
 %%
-[a-zA-Z]+	return TEXT;
-.	return yytext[0];
+"<"[a-zA-Z]+">"		return STAG;
+"</"[a-zA-Z]+">" 	return ETAG;
+[a-zA-Z]+			return DATA;
+[ \t]				;
+[\n]				return 0;
+.					return yytext[0];
 %%
 
 int yywrap(void)

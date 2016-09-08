@@ -1,9 +1,11 @@
 %{
 	#include <stdio.h>
 %}
-%token TEXT
+%token STAG ETAG DATA
 %%
-start: '<'TEXT'>';
+start: STAG text ETAG;
+text: text1 start|text1;
+text1: DATA|;
 %%
 main()
 {
